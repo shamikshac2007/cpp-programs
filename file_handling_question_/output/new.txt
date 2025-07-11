@@ -1,0 +1,1 @@
+1|c++|what is the purpose of the new operator in c++ ?  |to declare a new variable |to create a new class|to allocate memory dynamically |to free memory dynamically |C|2
