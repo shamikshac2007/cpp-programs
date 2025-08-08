@@ -148,21 +148,24 @@ int main() {
     // Create an instance of DBManager
     DBManager *ptrDbManager = NULL;
     ptrDbManager = new DBManager();
+    int choice;
 
+     do{
     // Display menu options
     std::cout << "Menu:\n";
     std::cout << "1. Display all products\n";
     std::cout << "2. Display a specific products\n";
     std::cout << "3. Insert a new products\n";
     std::cout << "4. Update a products\n";
-    std::cout << "5. Delete a products\n";
+    std::cout << "5. Delete a product\n";
     std::cout << "6. Exit\n";
-
-    int choice;
+    
+    
     std::cout << "Enter your choice: ";
     std::cin >> choice;
 
     // Handle user input and call appropriate methods on dbManager
+    
     switch (choice) {
         case 1:
             ptrDbManager->displayData();
@@ -172,7 +175,9 @@ int main() {
             int id;
             std::cout << "Enter product ID to display: ";
             std::cin >> id;
-            ptrDbManager->displayData(id);
+            ptrDbManager->displayData(id);           
+            std::cin.ignore();
+
             break;
         }
 
@@ -180,17 +185,18 @@ int main() {
             std::string name, description;
             double price;
             int id, stock, category_id;
-            std::cout << "Enter id: ";
-            std::cin >> id;
-            std::cout << "Enter name: ";
-            std::cin >> name;
-            std::cout << "Enter description: ";
-            std::cin >> description;
-            std::cout << "Enter price: ";
+            std::cout << "\nEnter id: ";
+            std::cin >> id ;
+            std::cin.ignore();
+            std::cout << "\nEnter name: ";
+            std::getline(std::cin,name);
+            std::cout << "\nEnter description: " ;
+            std::getline(std::cin,description);
+            std::cout << "\nEnter price: " ;
             std::cin >> price;
-            std::cout << "Enter stock: ";
+            std::cout << "\nEnter stock: " ;
             std::cin >> stock;
-            std::cout << "Enter category_id: ";
+            std::cout << "\nEnter category_id: " ;
             std::cin >> category_id;
 
             if (ptrDbManager->insertData(id, name, description, price, stock, category_id)) {
@@ -207,10 +213,11 @@ int main() {
             int id, stock, category_id;
             std::cout << "Enter id: ";
             std::cin >> id;
+            std::cin.ignore();
             std::cout << "Enter name: ";
-            std::cin >> name;
+            std::getline(std::cin,name);
             std::cout << "Enter description: ";
-            std::cin >> description;
+            std::getline(std::cin,description);
             std::cout << "Enter price: ";
             std::cin >> price;
             std::cout << "Enter stock: ";
@@ -244,6 +251,12 @@ int main() {
         default:
             std::cout << "Invalid choice. Please try again.\n";
     }
-
-    return 0;
 }
+while(choice!=6);
+return 0;
+    
+
+}
+
+// g++ connectivity.cpp -o conn.exe `mysql_config --cflags --libs`
+// 0./conn.exe
